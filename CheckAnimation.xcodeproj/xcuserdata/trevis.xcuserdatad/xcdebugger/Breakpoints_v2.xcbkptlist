@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CheckAnimation/SearchButton.swift"
-            timestampString = "517136288.886957"
+            timestampString = "517180196.974462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "magnificationCirclePath(_:)"
             landmarkType = "7">
          </BreakpointContent>

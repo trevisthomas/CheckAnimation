@@ -19,7 +19,7 @@ class SearchButton: UIView {
     
     let magnifierHeadLayer : CAShapeLayer = CAShapeLayer()
     let handleLayer: CAShapeLayer = CAShapeLayer()
-    
+    let slashLayer: CAShapeLayer = CAShapeLayer()
     
     enum state {
         case uninitilized
@@ -56,9 +56,14 @@ class SearchButton: UIView {
     }
     
     public func toggle() {
+        guard let isSearchMode = isSearchMode else {
+            return
+        }
         
-        if(isSearchMode == true) {
+        if(isSearchMode) {
             animateFromMagnifierToClose()
+        } else {
+            animateFromCloseToMagnifier()
         }
         
 //        isSearchMode = !isSearchMode
@@ -73,10 +78,42 @@ class SearchButton: UIView {
         
         
         
+        animateTheRoundPart()
+        animateTheHandle()
+        animateTheOtherSlash()
+        
+    }
+    
+    private func animateFromCloseToMagnifier() {
+        isSearchMode = nil //The idea is that during animation this is nil.
+        layer.setNeedsDisplay() //Gives draw the opertunity to be cleared.
+        
+        animateTheOtherSlash(reverse: true)
+        animateTheHandle(reverse: true)
+        animateTheRoundPart(reverse: true)
+        
+        
+    }
+
+    
+    private func animateTheRoundPart(reverse: Bool = false){
         CATransaction.begin()
         CATransaction.setCompletionBlock({
             self.magnifierHeadLayer.removeFromSuperlayer()
-//            self.handleLayer.removeFromSuperlayer()
+            
+            if(reverse) {
+                self.handleLayer.removeAllAnimations()
+                self.magnifierHeadLayer.removeAllAnimations()
+                self.slashLayer.removeAllAnimations()
+                self.slashLayer.removeFromSuperlayer()
+                self.handleLayer.removeFromSuperlayer()
+                
+                self.isSearchMode = true
+                self.setNeedsDisplay()
+            } else {
+                
+            }
+            //            self.handleLayer.removeFromSuperlayer()
         })
         
         magnifierHeadLayer.removeFromSuperlayer() //Ok this is weird.
@@ -92,14 +129,26 @@ class SearchButton: UIView {
         
         let magnifierStrokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         
-        magnifierStrokeAnimation.fromValue = 1.0
-        magnifierStrokeAnimation.toValue = 0.0
+        if reverse {
+            magnifierStrokeAnimation.fromValue = 0.0
+            magnifierStrokeAnimation.toValue = 1.0
+            magnifierStrokeAnimation.beginTime = CACurrentMediaTime() + 0.50
+            magnifierStrokeAnimation.fillMode = kCAFillModeBackwards
+            magnifierStrokeAnimation.isRemovedOnCompletion = false
+            magnifierStrokeAnimation.duration =  0.40
+        } else {
+            magnifierStrokeAnimation.fromValue = 1.0
+            magnifierStrokeAnimation.toValue = 0.0
+            magnifierStrokeAnimation.fillMode = kCAFillModeForwards
+            magnifierStrokeAnimation.isRemovedOnCompletion = true
+            magnifierStrokeAnimation.duration =  0.50
+        }
+        
         
         magnifierStrokeAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         //These dont seem to work with path
-        magnifierStrokeAnimation.fillMode = kCAFillModeForwards
-        magnifierStrokeAnimation.isRemovedOnCompletion = true
-        magnifierStrokeAnimation.duration =  0.50
+        
+        
         
         
         magnifierHeadLayer.add(magnifierStrokeAnimation, forKey: nil)
@@ -107,19 +156,17 @@ class SearchButton: UIView {
         layer.addSublayer(magnifierHeadLayer)
         
         CATransaction.commit()
-        //Handle
-        
-        animateTheHandle()
-        animateTheOtherSlash()
-        
     }
     
-    private func animateTheHandle(){
+    private func animateTheHandle(reverse: Bool = false){
         
         
         CATransaction.begin()
         CATransaction.setCompletionBlock({
-//            handleLayer.removeFromSuperlayer()
+            if (reverse) {
+//                self.handleLayer.removeAllAnimations()
+            }
+            
         })
         handleLayer.removeFromSuperlayer() //Maybe not needed
         handleLayer.fillColor = UIColor.clear.cgColor
@@ -130,15 +177,22 @@ class SearchButton: UIView {
         
         let handleStrokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         
-        handleStrokeAnimation.fromValue = 0.33
-        handleStrokeAnimation.toValue = 1.0
+        if reverse {
+            handleStrokeAnimation.fromValue = 1.0
+            handleStrokeAnimation.toValue = 0.33
+            handleStrokeAnimation.fillMode = kCAFillModeForwards
+            handleStrokeAnimation.isRemovedOnCompletion = false
+        } else {
+            handleStrokeAnimation.fromValue = 0.33
+            handleStrokeAnimation.toValue = 1.0
+            handleStrokeAnimation.beginTime = CACurrentMediaTime() + 0.50
+            handleStrokeAnimation.fillMode = kCAFillModeBackwards
+            handleStrokeAnimation.isRemovedOnCompletion = true
+        }
         
         handleStrokeAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        handleStrokeAnimation.fillMode = kCAFillModeBackwards
-        handleStrokeAnimation.isRemovedOnCompletion = true
-        handleStrokeAnimation.duration =  0.30
-        handleStrokeAnimation.beginTime = CACurrentMediaTime() + 0.50
         
+        handleStrokeAnimation.duration =  0.30
         
         handleLayer.add(handleStrokeAnimation, forKey: nil)
         
@@ -146,18 +200,33 @@ class SearchButton: UIView {
         CATransaction.commit()
     }
     
-    private func animateTheOtherSlash(){
-        let slashLayer: CAShapeLayer = CAShapeLayer()
+    private func animateTheOtherSlash(reverse: Bool = false){
+        
         
         
         
         CATransaction.begin()
         CATransaction.setCompletionBlock({
-            slashLayer.removeFromSuperlayer()
-            self.handleLayer.removeFromSuperlayer()
             
-            self.isSearchMode = false
-            self.setNeedsDisplay() //Gives draw the opertunity to be cleared.
+//            if(reverse) {
+//                self.slashLayer.removeAllAnimations()
+//                self.slashLayer.removeFromSuperlayer()
+//                self.handleLayer.removeFromSuperlayer()
+//                
+//                self.isSearchMode = true
+//                self.setNeedsDisplay()
+//            }
+            
+            if reverse {
+                
+                // not here!
+            } else {
+                self.slashLayer.removeFromSuperlayer()
+                self.handleLayer.removeFromSuperlayer()
+                self.isSearchMode = false
+                self.setNeedsDisplay() //Gives draw the opertunity to be cleared.
+            }
+            
             
         })
 //        slashLayer.removeFromSuperlayer() //Maybe not needed
@@ -191,30 +260,46 @@ class SearchButton: UIView {
         
         let slashStrokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         
-        slashStrokeAnimation.fromValue = 0.33
-        slashStrokeAnimation.toValue = 1.0
+        if reverse {
+            slashStrokeAnimation.fromValue = 1.0
+            slashStrokeAnimation.toValue = 0.33
+            slashStrokeAnimation.fillMode = kCAFillModeForwards
+            slashStrokeAnimation.isRemovedOnCompletion = false
+        } else {
+            slashStrokeAnimation.fromValue = 0.33
+            slashStrokeAnimation.toValue = 1.0
+            slashStrokeAnimation.beginTime = CACurrentMediaTime() + 0.50
+            slashStrokeAnimation.fillMode = kCAFillModeBackwards
+            slashStrokeAnimation.isRemovedOnCompletion = true
+        }
         
         slashStrokeAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        slashStrokeAnimation.fillMode = kCAFillModeBackwards
-        slashStrokeAnimation.isRemovedOnCompletion = true
-        slashStrokeAnimation.duration =  0.30
-        slashStrokeAnimation.beginTime = CACurrentMediaTime() + 0.50
+        
+        
+        
         
         slashLayer.add(slashStrokeAnimation, forKey: nil)
         
         
-        
-        
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
         
-        rotateAnimation.fromValue = 0.0
-        rotateAnimation.toValue = .pi / 2.0
+        if reverse {
+            rotateAnimation.toValue = 0.0
+            rotateAnimation.fromValue = .pi / 2.0
+            rotateAnimation.fillMode = kCAFillModeForwards
+            rotateAnimation.isRemovedOnCompletion = false
+        } else {
+            rotateAnimation.fromValue = 0.0
+            rotateAnimation.toValue = .pi / 2.0
+            rotateAnimation.beginTime = CACurrentMediaTime() + 0.50
+            rotateAnimation.fillMode = kCAFillModeBackwards
+            rotateAnimation.isRemovedOnCompletion = true
+        }
         
         rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        rotateAnimation.fillMode = kCAFillModeBackwards
-        rotateAnimation.isRemovedOnCompletion = true
+        
         rotateAnimation.duration =  0.60
-        rotateAnimation.beginTime = CACurrentMediaTime() + 0.50
+        
         
         slashLayer.add(rotateAnimation, forKey: nil)
         
