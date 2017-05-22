@@ -10,14 +10,30 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var checkMark: CheckMarkView!
+    
+    @IBOutlet weak var magnifierView: SearchButton!
+    @IBAction func tappedAction(_ sender: Any) {
+        checkMark.checked(!checkMark.isChecked, animated: true)
+    }
+    
+    @IBAction func tappedMagnifierAction(_ sender: Any) {
+        print("Magnify")
+        magnifierView.toggle()
+    }
+    
+    @IBOutlet weak var mySwitch: UISwitch!
+    @IBAction func performSwitch(_ sender: UISwitch) {
+        checkMark.checked(sender.isOn, animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        checkMark.checked(mySwitch.isOn)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 

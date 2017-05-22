@@ -12,6 +12,8 @@
 		0F06A2681E73416600AC7070 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A2661E73416600AC7070 /* Main.storyboard */; };
 		0F06A26A1E73416600AC7070 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A2691E73416600AC7070 /* Assets.xcassets */; };
 		0F06A26D1E73416600AC7070 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F06A26B1E73416600AC7070 /* LaunchScreen.storyboard */; };
+		0F06A2751E7341AE00AC7070 /* CheckMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F06A2741E7341AE00AC7070 /* CheckMarkView.swift */; };
+		0FD1E2151ED233CE00D8BD1A /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD1E2141ED233CE00D8BD1A /* SearchButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		0F06A2691E73416600AC7070 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F06A26C1E73416600AC7070 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F06A26E1E73416600AC7070 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F06A2741E7341AE00AC7070 /* CheckMarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckMarkView.swift; sourceTree = "<group>"; };
+		0FD1E2141ED233CE00D8BD1A /* SearchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +58,14 @@
 		0F06A2611E73416600AC7070 /* CheckAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				0FD1E2141ED233CE00D8BD1A /* SearchButton.swift */,
 				0F06A2621E73416600AC7070 /* AppDelegate.swift */,
 				0F06A2641E73416600AC7070 /* ViewController.swift */,
 				0F06A2661E73416600AC7070 /* Main.storyboard */,
 				0F06A2691E73416600AC7070 /* Assets.xcassets */,
 				0F06A26B1E73416600AC7070 /* LaunchScreen.storyboard */,
 				0F06A26E1E73416600AC7070 /* Info.plist */,
+				0F06A2741E7341AE00AC7070 /* CheckMarkView.swift */,
 			);
 			path = CheckAnimation;
 			sourceTree = "<group>";
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F06A2751E7341AE00AC7070 /* CheckMarkView.swift in Sources */,
 				0F06A2651E73416600AC7070 /* ViewController.swift in Sources */,
 				0F06A2631E73416600AC7070 /* AppDelegate.swift in Sources */,
+				0FD1E2151ED233CE00D8BD1A /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +310,7 @@
 				0F06A2731E73416600AC7070 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
