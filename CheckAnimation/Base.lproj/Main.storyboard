@@ -53,7 +53,7 @@
                             </switch>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUu-76-aS1" customClass="SearchButton" customModule="CheckAnimation" customModuleProvider="target">
                                 <rect key="frame" x="87" y="269" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.6386070251" green="0.80702608819999999" blue="0.64577037100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NUu-76-aS1" secondAttribute="height" multiplier="1:1" id="I5Q-lH-HGx"/>
                                     <constraint firstAttribute="height" constant="60" id="bZv-Ic-OWC"/>

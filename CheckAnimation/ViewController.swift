@@ -30,6 +30,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         checkMark.checked(mySwitch.isOn)
+        
+        magnifierView.initialize()
     }
 
     override func didReceiveMemoryWarning() {

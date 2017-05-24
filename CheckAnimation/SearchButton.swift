@@ -20,23 +20,26 @@ class SearchButton: UIView {
     let magnifierHeadLayer : CAShapeLayer = CAShapeLayer()
     let handleLayer: CAShapeLayer = CAShapeLayer()
     let slashLayer: CAShapeLayer = CAShapeLayer()
+    private var isInitialized: Bool?
     
-    enum state {
-        case uninitilized
-        case search
-        case close
+    func initialize() {
+        isInitialized = false
+        self.animateInitialState()
     }
     
+    
     override func draw(_ rect: CGRect) {
-//        let path = UIBezierPath(ovalIn: rect.insetBy(dx: 5, dy: 5))
-//        
-//        path.lineWidth = thickness
         color.setStroke()
-//
-//        path.stroke()
+        
+        guard let isInitialized = isInitialized else {
+            return
+        }
+        
+        if !isInitialized {
+            return
+        }
         
         guard let isSearchMode = isSearchMode else {
-        
             return
         }
         
@@ -65,9 +68,6 @@ class SearchButton: UIView {
         } else {
             animateFromCloseToMagnifier()
         }
-        
-//        isSearchMode = !isSearchMode
-        
     }
     
     private func animateFromMagnifierToClose() {
@@ -110,6 +110,8 @@ class SearchButton: UIView {
                 
                 self.isSearchMode = true
                 self.setNeedsDisplay()
+                
+                self.bounceAnimation()
             } else {
                 
             }
@@ -296,9 +298,9 @@ class SearchButton: UIView {
             rotateAnimation.isRemovedOnCompletion = true
         }
         
-        rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
-        rotateAnimation.duration =  0.60
+        rotateAnimation.duration =  0.50
         
         
         slashLayer.add(rotateAnimation, forKey: nil)
@@ -307,6 +309,47 @@ class SearchButton: UIView {
         CATransaction.commit()
     }
     
+    
+    private func animateInitialState(){
+        let magnifierLayer = CAShapeLayer()
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            self.isInitialized = true
+            self.isSearchMode = true
+            self.setNeedsDisplay()
+            
+            magnifierLayer.removeFromSuperlayer()
+            
+            self.bounceAnimation()
+        })
+        
+        magnifierLayer.fillColor = UIColor.clear.cgColor
+        magnifierLayer.backgroundColor = UIColor.white.cgColor
+        magnifierLayer.strokeColor = color.cgColor
+        magnifierLayer.lineWidth = thickness
+        magnifierLayer.path = magnificationCirclePath(bounds).cgPath
+        
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.beginTime = CACurrentMediaTime() + 0.20
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = true
+    
+        
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        animation.duration =  1.30
+        
+        magnifierLayer.add(animation, forKey: nil)
+        
+        layer.addSublayer(magnifierLayer)
+        
+        CATransaction.commit()
+    }
+
     
     
     private func magnifyCirclePath(_ rect: CGRect) -> UIBezierPath {
@@ -364,6 +407,19 @@ class SearchButton: UIView {
         return path
         
     }
+    
+    // a function to add a bit of snap. Just a quick bounce of the entire view.
+    private func bounceAnimation() {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: {
+            self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }, completion: { (_ :Bool) in
+            UIView.animate(withDuration: 0.33, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: [.curveEaseOut], animations: {
+                self.transform = .identity
+            }, completion: { (_ :Bool) in })
+        })
+    }
+    
+    
     
     private func magnificationCirclePath (_ rect: CGRect) -> UIBezierPath{
         

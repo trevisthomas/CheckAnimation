@@ -10,12 +10,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CheckAnimation/SearchButton.swift"
-            timestampString = "517180196.974462"
+            timestampString = "517252382.026304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
             landmarkName = "magnificationCirclePath(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CheckAnimation/SearchButton.swift"
+            timestampString = "517252382.026304"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
+            landmarkName = "animateInitialState()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CheckAnimation.SearchButton.(animateInitialState in _8665A32F6869D6DA7634577747E09789) () -&gt; ()"
+                  moduleName = "CheckAnimation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trevis/Desktop/Projects%20iOS%20-%20Second%20Time/Experimental/CheckAnimation/CheckAnimation/CheckAnimation/SearchButton.swift"
+                  timestampString = "517251741.898013"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "321"
+                  endingLineNumber = "321"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CheckAnimation.SearchButton.((animateInitialState in _8665A32F6869D6DA7634577747E09789) () -&gt; ()).(closure #1)"
+                  moduleName = "CheckAnimation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trevis/Desktop/Projects%20iOS%20-%20Second%20Time/Experimental/CheckAnimation/CheckAnimation/CheckAnimation/SearchButton.swift"
+                  timestampString = "517251741.906185"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "322"
+                  endingLineNumber = "322"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CheckAnimation/SearchButton.swift"
+            timestampString = "517252332.602412"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "draw(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
